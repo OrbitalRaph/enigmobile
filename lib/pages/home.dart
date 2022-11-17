@@ -18,9 +18,9 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Column(
-            children: [
-              const SizedBox(height: 20),
-              const Text(
+            children: const [
+              SizedBox(height: 20),
+              Text(
                 'EnigMobile',
                 style: TextStyle(
                   color: Colors.white,
@@ -28,23 +28,23 @@ class Home extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20),
+              Text(
                 'Bienvenue sur EnigMobile',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                 ),
               ),
-              const SizedBox(height: 20),
-              const Text(
+              SizedBox(height: 20),
+              Text(
                 'Cliquez sur le bouton ci-dessous pour commencer',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               ListeDefis(),
             ],
           ),
