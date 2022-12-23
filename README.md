@@ -1,16 +1,13 @@
 # enigmobile
 
-A new Flutter project.
+Projet final de appmobile
 
-## Getting Started
+## Fonctionnement
 
-This project is a starting point for a Flutter application.
+Créer ou sélectionner un utilisateur.
 
-A few resources to get you started if this is your first Flutter project:
+Vous pouvez défier quelqu'un à vous affronté dans la sélection de quiz offertes
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+En créant le défis, vous devez remplir le quiz une première fois, puis l'autre utilisateur va recevoir le défis.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Il pourra faire le quiz à son tour, puis comparé ensuite les résulats des deux partie.
