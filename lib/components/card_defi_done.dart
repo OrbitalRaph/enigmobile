@@ -4,23 +4,28 @@ import 'package:enigmobile/models/utilisateur.dart';
 import 'package:enigmobile/database/enigmobile_database.dart';
 import 'package:flutter/material.dart';
 
-class CardDefi extends StatefulWidget {
-  const CardDefi({Key? key, required this.defi, this.onTap}) : super(key: key);
+class CardDefiDone extends StatefulWidget {
+  const CardDefiDone({Key? key, required this.defi, this.onTap})
+      : super(key: key);
 
   final Defi defi;
   final VoidCallback? onTap;
 
   @override
-  _CardDefiState createState() => _CardDefiState();
+  _CardDefiDoneState createState() => _CardDefiDoneState();
 }
 
-class _CardDefiState extends State<CardDefi> {
+class _CardDefiDoneState extends State<CardDefiDone> {
   late Enigme enigme;
-  late Utilisateur utilisateur;
+  late Utilisateur utilisateur1;
+  late Utilisateur utilisateur2;
 
   Future<void> getCardData() async {
-    utilisateur =
+    utilisateur2 =
         await EnigmobileDatabase.utilisateur(widget.defi.utilisateur2Id);
+
+    utilisateur1 =
+        await EnigmobileDatabase.utilisateur(widget.defi.utilisateur1Id);
 
     enigme = await EnigmobileDatabase.enigme(widget.defi.enigmeId);
   }
@@ -41,10 +46,11 @@ class _CardDefiState extends State<CardDefi> {
               margin: const EdgeInsets.only(bottom: 20),
               padding: const EdgeInsets.all(15),
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.grey[300],
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
                     width: 70,
@@ -59,24 +65,31 @@ class _CardDefiState extends State<CardDefi> {
                     ),
                   ),
                   const SizedBox(width: 20),
-                  Column(
+                  Expanded(
+                      child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(enigme.titre,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          overflow: TextOverflow.ellipsis),
-                      const SizedBox(height: 10),
-                      Text(
-                          "Défi de ${utilisateur.nom}\na eu un score de ${widget.defi.score2}",
+                      Text("${enigme.titre} - Terminé",
                           style: const TextStyle(
                             fontSize: 15,
-                            color: Colors.grey,
+                            fontWeight: FontWeight.bold,
                           ),
-                          overflow: TextOverflow.ellipsis),
+                          overflow: TextOverflow.fade,
+                          softWrap: false),
+                      const SizedBox(height: 10),
+                      Text(
+                          "${utilisateur2.nom} : ${widget.defi.score2}\n${utilisateur1.nom} : ${widget.defi.score1}",
+                          style: const TextStyle(
+                            fontSize: 15,
+                            color: Colors.black54,
+                          ),
+                          overflow: TextOverflow.ellipsis,
+                          softWrap: false),
                     ],
+                  )),
+                  const Icon(
+                    Icons.delete,
+                    color: Colors.redAccent,
                   ),
                 ],
               ),

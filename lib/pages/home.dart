@@ -1,11 +1,14 @@
-import 'package:flutter/material.dart';
 import 'package:enigmobile/components/liste_defis.dart';
+import 'package:enigmobile/models/utilisateur.dart';
+import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final Utilisateur utilisateur =
+        ModalRoute.of(context)!.settings.arguments as Utilisateur;
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
@@ -18,34 +21,71 @@ class Home extends StatelessWidget {
         backgroundColor: Colors.transparent,
         body: SafeArea(
           child: Column(
-            children: const [
-              SizedBox(height: 20),
-              Text(
-                'EnigMobile',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold,
+            children: [
+              const SizedBox(height: 20),
+              // title of the app to the left, profile picture to the right
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // add padding to the left
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20),
+                    child: Text(
+                      'EnigMobile',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 20),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const CircleAvatar(
+                        radius: 30,
+                        backgroundImage: NetworkImage(
+                            'https://www.woolha.com/media/2020/03/eevee.png'),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Bonjour ${utilisateur.nom},',
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
-                'Bienvenue sur EnigMobile',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
+              const SizedBox(height: 10),
+              // align start to put the text to the left but add a padding to the left
+              const Padding(
+                padding: EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Testons vos connaissances',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 20),
-              Text(
-                'Cliquez sur le bouton ci-dessous pour commencer',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                ),
-              ),
-              SizedBox(height: 20),
-              ListeDefis(),
+              const SizedBox(height: 20),
+              ListDefi(idUtilisateur: utilisateur.id),
             ],
           ),
         ),
